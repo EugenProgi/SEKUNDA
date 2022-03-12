@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        label {
+            display: inline-block;
+            width: 50px;
+        }
+ 
+        input {
+            width: 80px;
+            text-align: center;
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <label>Дата:</label> <input id="date" readonly><br>
+    <label>Время:</label> <input id="time" reasonly>
+    <script>
+        function dateParts(date = new Date()) {
+            const pad = d => d.toString().padStart(2, "0");
+ 
+            let year = date.getFullYear().toString().padStart(4, "0"), // Год
+                month = pad(date.getMonth() + 1), // Месяц
+                dd = pad(date.getDate()), // День 
+                hh = pad(date.getHours()),
+                mm = pad(date.getMinutes()),
+                ss = pad(date.getSeconds());
+            return [year, month, dd, hh, mm, ss];
+        }
+ 
+        function showDateTime() {
+            let a = dateParts();
+            document.getElementById("date").value = `${a[2]}.${a[1]}.${a[0]}`;
+            document.getElementById("time").value = `${a[3]}:${a[4]}:${a[5]}`;
+        }
+ 
+        showDateTime(); // Первоначальное заполнение полей
+        setInterval(showDateTime, 1000); // Показывать каждую секунду
+    </script>
+</body>
+</html>
